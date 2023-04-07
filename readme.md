@@ -19,7 +19,7 @@
 - [x] Slash Command (Base, Group, Sub)
 - [x] Whitelist With Categories
 - [x] Owner Level Whitelist
-
+- [x] Log Channel
 <details><summary>📎 Requirements [CLICK ME]</summary>
 <p>
 
