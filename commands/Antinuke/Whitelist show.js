@@ -1,5 +1,5 @@
 const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
-const AntinukeGuildSettings = require("../../settings/models/Antinuke")
+const AntinukeGuildSettings = require("../../Models/Antinuke")
 module.exports = {
     name: ["antinuke", "whitelist", "show"],
     description: "Shows the whitelist of users for a selected antinuke category",
