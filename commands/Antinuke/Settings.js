@@ -1,5 +1,5 @@
 const { EmbedBuilder, ApplicationCommandOptionType } = require('discord.js');
-const GuildSettings = require("../../settings/models/Antinuke")
+const GuildSettings = require("../../Models/Antinuke")
 module.exports = {
     name: ["antinuke", "settings"],
     description: "check antinuke settings of the guild",
