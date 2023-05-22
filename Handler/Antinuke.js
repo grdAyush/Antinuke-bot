@@ -1,9 +1,10 @@
-const { EmbedBuilder, AuditLogEvent } = require("discord.js");
-const GuildSettings = require("../Models/Antinuke");
+const { EmbedBuilder, AuditLogEvent, PermissionFlagsBits } = require("discord.js");
+const GuildSettings = require("../../Models/Antinuke");
 
 module.exports = (client) => {
   //=================================== Anti Channel Events ===================================//
   client.on("channelCreate", async (channel) => {
+    if(!channel.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await channel.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelCreate,
       limit: 1,
@@ -28,7 +29,7 @@ module.exports = (client) => {
 
         channel.delete();
         const member = await channel.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Channel Create" });
+        member.ban({ reason: "© Nityam Anti Channel Create" });
 
         const logChannel = channel.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -58,7 +59,7 @@ module.exports = (client) => {
                     value: `> Creating Channels`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -68,6 +69,7 @@ module.exports = (client) => {
   });
 
   client.on("channelDelete", async (channel) => {
+    if(!channel.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await channel.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelDelete,
       limit: 1,
@@ -93,7 +95,7 @@ module.exports = (client) => {
         channel.clone();
 
         const member = await channel.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Channel Delete" });
+        member.ban({ reason: "© Nityam Anti Channel Delete" });
 
         const logChannel = channel.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -123,7 +125,7 @@ module.exports = (client) => {
                     value: `> Deleting Channels`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -133,6 +135,7 @@ module.exports = (client) => {
   });
 
   client.on("channelUpdate", async (o, n) => {
+    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await n.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelUpdate,
       limit: 1,
@@ -157,7 +160,7 @@ module.exports = (client) => {
       const newName = n.name;
 
       const member = await n.guild.members.fetch(executor.id);
-      member.ban({ reason: "© Aksh Anti Channel Update" });
+      member.ban({ reason: "© Nityam Anti Channel Update" });
 
       const logChannel = channel.guild.channels.cache.get(data.logChannel);
       if (logChannel) {
@@ -187,7 +190,7 @@ module.exports = (client) => {
                   value: `> Updating Channels`,
                 }
               )
-              .setFooter({ text: `© Aksh Antinuke Logs` })
+              .setFooter({ text: `© Nityam Antinuke Logs` })
               .setTimestamp(),
           ],
         });
@@ -211,6 +214,7 @@ module.exports = (client) => {
   //=================================== Anti Role Events ===================================//
 
   client.on("roleCreate", async (role) => {
+    if(!role.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await role.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleCreate,
       limit: 1,
@@ -235,7 +239,7 @@ module.exports = (client) => {
 
         role.delete();
         const member = await role.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Role Create" });
+        member.ban({ reason: "© Nityam Anti Role Create" });
 
         const logChannel = role.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -265,7 +269,7 @@ module.exports = (client) => {
                     value: `> Creating Roles`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -275,6 +279,7 @@ module.exports = (client) => {
   });
 
   client.on("roleUpdate", async (o, n) => {
+    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await n.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleUpdate,
       limit: 1,
@@ -297,7 +302,7 @@ module.exports = (client) => {
 
       n.setPermissions(o.permissions);
       const member = await n.guild.members.fetch(executor.id);
-      member.ban({ reason: "© Aksh Anti Role Update" });
+      member.ban({ reason: "© Nityam Anti Role Update" });
 
       const logChannel = role.guild.channels.cache.get(data.logChannel);
       if (logChannel) {
@@ -327,7 +332,7 @@ module.exports = (client) => {
                   value: `> Updating Roles`,
                 }
               )
-              .setFooter({ text: `© Aksh Antinuke Logs` })
+              .setFooter({ text: `© Nityam Antinuke Logs` })
               .setTimestamp(),
           ],
         });
@@ -336,6 +341,7 @@ module.exports = (client) => {
   });
 
   client.on("roleDelete", async (role) => {
+    if(!role.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await role.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleDelete,
       limit: 1,
@@ -361,7 +367,7 @@ module.exports = (client) => {
 
         role.guild.roles.create({ name: role.name, color: role.color });
         const member = await role.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Role Delete" });
+        member.ban({ reason: "© Nityam Anti Role Delete" });
 
         const logChannel = role.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -391,7 +397,7 @@ module.exports = (client) => {
                     value: `> Deleting Roles`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -402,6 +408,7 @@ module.exports = (client) => {
 
   //=================================== Anti Member Events ===================================//
   client.on("guildMemberUpdate", async (o, n) => {
+    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await n.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.MemberRoleUpdate,
@@ -431,7 +438,7 @@ module.exports = (client) => {
       }
 
       const member = await n.guild.members.fetch(executor.id);
-      member.ban({ reason: "© Aksh Anti Member Role Update" });
+      member.ban({ reason: "© Nityam Anti Member Role Update" });
 
       const logChannel = role.guild.channels.cache.get(data.logChannel);
       if (logChannel) {
@@ -461,7 +468,7 @@ module.exports = (client) => {
                   value: `> Updating Member Roles`,
                 }
               )
-              .setFooter({ text: `© Aksh Antinuke Logs` })
+              .setFooter({ text: `© Nityam Antinuke Logs` })
               .setTimestamp(),
           ],
         });
@@ -471,6 +478,7 @@ module.exports = (client) => {
 
   //=================================== Anti Ban Events ===================================//
   client.on("guildBanAdd", async (member) => {
+    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.MemberBanAdd,
       limit: 1,
@@ -495,7 +503,7 @@ module.exports = (client) => {
         if (executor.id === member.guild.ownerId) return;
 
         const member2 = member.guild.members.fetch(executor.id);
-        member2.ban({ reason: "© Aksh Anti Member Ban " });
+        member2.ban({ reason: "© Nityam Anti Member Ban " });
 
         const logChannel = member.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -529,7 +537,7 @@ module.exports = (client) => {
                     value: `> ${target} ${target.id}`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -540,21 +548,19 @@ module.exports = (client) => {
 
   //=================================== Anti Kick Events ===================================//
   client.on("guildMemberRemove", async (member) => {
+    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.MemberKick,
       limit: 1,
     });
     const logs = auditLogs.entries.first();
     if(!logs) return;
-    const { executorId, targetId } = logs;
+    const { executor, target } = logs;
 
     await GuildSettings.findOne(
       { guildId: member.guild.id },
       async (err, data) => {
         if(!data) return;
-
-        const executor = await client.users.fetch(executorId);
-        const target = await client.users.fetch(targetId);
         const antinuke = data.enabled.kicks;
         const trusted = data.whitelist.kicks.includes(executor.id);
         const owner = data.ownerLevel.includes(executor.id);
@@ -567,7 +573,7 @@ module.exports = (client) => {
         if (owner === true) return;
 
         const member2 = member.guild.members.fetch(executor.id);
-        member2.ban({ reason: "© Aksh Anti Member Kick " });
+        member2.ban({ reason: "© Nityam Anti Member Kick " });
 
         const logChannel = member.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -601,7 +607,7 @@ module.exports = (client) => {
                     value: `> ${target} ${target.id}`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -612,11 +618,12 @@ module.exports = (client) => {
 
   //=================================== Anti Bot Events ===================================//
   client.on("guildMemberAdd", async (member) => {
+    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.BotAdd,
       limit: 1,
     });
-    const logs = await auditLogs.entries.first();
+    const logs = auditLogs.entries.first();
     if(!logs) return;
     const { executor, target } = logs;
 
@@ -624,7 +631,6 @@ module.exports = (client) => {
       { guildId: member.guild.id },
       async (err, data) => {
         if(!data) return;
-        
         const antinuke = data.enabled.antibot;
         const trusted = data.whitelist.antibot.includes(executor.id);
         const owner = data.ownerLevel.includes(executor.id);
@@ -638,9 +644,9 @@ module.exports = (client) => {
         if (target.id !== member.id) return;
 
         const member3 = member.guild.members.fetch(executor.id);
-        member3.ban({ reason: "© Aksh Anti Bot Add " });
+        member3.ban({ reason: "© Nityam Anti Bot Add " });
         const member2 = member.guild.members.fetch(target.id);
-        member2.ban({ reason: "© Aksh Anti Bot Add " });
+        member2.ban({ reason: "© Nityam Anti Bot Add " });
 
         const logChannel = member.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -674,7 +680,7 @@ module.exports = (client) => {
                     value: `> ${target} ${target.id}`,
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -686,6 +692,7 @@ module.exports = (client) => {
   //=================================== Anti Webhook Events ===================================//
 
   client.on("webhookUpdate", async (webhook) => {
+    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookUpdate,
@@ -709,7 +716,7 @@ module.exports = (client) => {
         if (executor.id === webhook.guild.ownerId) return;
 
         const member = webhook.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Webhook Update" });
+        member.ban({ reason: "© Nityam Anti Webhook Update" });
 
         const logChannel = webhook.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -739,7 +746,7 @@ module.exports = (client) => {
                     value: "> Updating Webhook",
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -749,6 +756,7 @@ module.exports = (client) => {
   });
 
   client.on("webhookUpdate", async (webhook) => {
+    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookCreate,
@@ -772,7 +780,7 @@ module.exports = (client) => {
         if (executor.id === webhook.guild.ownerId) return;
 
         const member = webhook.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Webhook Create" });
+        member.ban({ reason: "© Nityam Anti Webhook Create" });
 
         const logChannel = webhook.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -802,7 +810,7 @@ module.exports = (client) => {
                     value: "> Creating Webhooks",
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
@@ -812,6 +820,7 @@ module.exports = (client) => {
   });
 
   client.on("webhookUpdate", async (webhook) => {
+    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookDelete,
@@ -835,7 +844,7 @@ module.exports = (client) => {
         if (executor.id === webhook.guild.ownerId) return;
 
         const member = webhook.guild.members.fetch(executor.id);
-        member.ban({ reason: "© Aksh Anti Webhook Delete" });
+        member.ban({ reason: "© Nityam Anti Webhook Delete" });
 
         const logChannel = webhook.guild.channels.cache.get(data.logChannel);
         if (logChannel) {
@@ -862,10 +871,10 @@ module.exports = (client) => {
                   },
                   {
                     name: "Reason",
-                    value: "> © Aksh Anti Webhook Delete",
+                    value: "> © Nityam Anti Webhook Delete",
                   }
                 )
-                .setFooter({ text: `© Aksh Antinuke Logs` })
+                .setFooter({ text: `© Nityam Antinuke Logs` })
                 .setTimestamp(),
             ],
           });
