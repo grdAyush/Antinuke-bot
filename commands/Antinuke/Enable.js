@@ -1,4 +1,4 @@
-const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
+const { EmbedBuilder, ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.js");
 const GuildSettings = require("../../Models/Antinuke");
 
 module.exports = {
@@ -57,6 +57,9 @@ module.exports = {
   },
   run: async (interaction, client, user, language) => {
     await interaction.deferReply();
+    if(!interaction.guild.me.permissions.has(PermissionFlagsBits.Administrator)) interaction .channel.send({
+      content: "**Warning**: I Don't Have Administrator Permission, Please Gimme Perms Of Administrator"
+    })
 
     if(interaction.user.id !== interaction.guild.ownerId){
       interaction.editReply({ content: `You Are Not Owner Of This Guild`, ephemeral: true });
