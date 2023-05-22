@@ -4,7 +4,7 @@ const GuildSettings = require("../../Models/Antinuke");
 module.exports = (client) => {
   //=================================== Anti Channel Events ===================================//
   client.on("channelCreate", async (channel) => {
-    if(!channel.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!channel.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await channel.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelCreate,
       limit: 1,
@@ -69,7 +69,7 @@ module.exports = (client) => {
   });
 
   client.on("channelDelete", async (channel) => {
-    if(!channel.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!channel.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await channel.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelDelete,
       limit: 1,
@@ -135,7 +135,7 @@ module.exports = (client) => {
   });
 
   client.on("channelUpdate", async (o, n) => {
-    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!n.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await n.guild.fetchAuditLogs({
       type: AuditLogEvent.ChannelUpdate,
       limit: 1,
@@ -214,7 +214,7 @@ module.exports = (client) => {
   //=================================== Anti Role Events ===================================//
 
   client.on("roleCreate", async (role) => {
-    if(!role.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!role.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await role.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleCreate,
       limit: 1,
@@ -279,7 +279,7 @@ module.exports = (client) => {
   });
 
   client.on("roleUpdate", async (o, n) => {
-    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!n.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await n.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleUpdate,
       limit: 1,
@@ -341,7 +341,7 @@ module.exports = (client) => {
   });
 
   client.on("roleDelete", async (role) => {
-    if(!role.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!role.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditlogs = await role.guild.fetchAuditLogs({
       type: AuditLogEvent.RoleDelete,
       limit: 1,
@@ -408,7 +408,7 @@ module.exports = (client) => {
 
   //=================================== Anti Member Events ===================================//
   client.on("guildMemberUpdate", async (o, n) => {
-    if(!n.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!n.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await n.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.MemberRoleUpdate,
@@ -478,7 +478,7 @@ module.exports = (client) => {
 
   //=================================== Anti Ban Events ===================================//
   client.on("guildBanAdd", async (member) => {
-    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.MemberBanAdd,
       limit: 1,
@@ -548,7 +548,7 @@ module.exports = (client) => {
 
   //=================================== Anti Kick Events ===================================//
   client.on("guildMemberRemove", async (member) => {
-    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.MemberKick,
       limit: 1,
@@ -618,7 +618,7 @@ module.exports = (client) => {
 
   //=================================== Anti Bot Events ===================================//
   client.on("guildMemberAdd", async (member) => {
-    if(!member.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!member.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLogs = await member.guild.fetchAuditLogs({
       type: AuditLogEvent.BotAdd,
       limit: 1,
@@ -692,7 +692,7 @@ module.exports = (client) => {
   //=================================== Anti Webhook Events ===================================//
 
   client.on("webhookUpdate", async (webhook) => {
-    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!webhook.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookUpdate,
@@ -756,7 +756,7 @@ module.exports = (client) => {
   });
 
   client.on("webhookUpdate", async (webhook) => {
-    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!webhook.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookCreate,
@@ -820,7 +820,7 @@ module.exports = (client) => {
   });
 
   client.on("webhookUpdate", async (webhook) => {
-    if(!webhook.guild.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
+    if(!webhook.guild.members.me.permissions.has(PermissionFlagsBits.ViewAuditLog)) return;
     const auditLog = await webhook.guild.fetchAuditLogs({
       limit: 1,
       type: AuditLogEvent.WebhookDelete,
