@@ -57,7 +57,7 @@ module.exports = {
   },
   run: async (interaction, client, user, language) => {
     await interaction.deferReply();
-    if(!interaction.guild.me.permissions.has(PermissionFlagsBits.Administrator)) interaction .channel.send({
+    if(!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Administrator)) interaction .channel.send({
       content: "**Warning**: I Don't Have Administrator Permission, Please Gimme Perms Of Administrator"
     })
 
