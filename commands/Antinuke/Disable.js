@@ -40,6 +40,10 @@ module.exports = {
           name: "AntiBan",
           value: "bans",
         },
+        {
+          name: "AntiGuild Update",
+          value: "guildUpdate",
+        }
       ],
     },
   ],
@@ -77,21 +81,22 @@ module.exports = {
       settings.enabled.kicks = false;
       settings.enabled.bans = false;
       settings.enabled.antibot = false;
+      settings.enabled.guildUpdate = false;
 
       await settings.save();
 
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setTitle("<a:antinuke:1087674015352623194> Antinuke Settings")
+            .setTitle("🚩 Antinuke Settings")
             .setDescription(
               `
-        AntiRole Create/Delete:    <:disabled:1087683956197031976>,\n
-        AntiChannel Create/Delete: <:disabled:1087683956197031976>,\n
-        AntiWebhook Create/Delete: <:disabled:1087683956197031976>\n
-        AntiKick:                  <:disabled:1087683956197031976>\n
-        AntiBot Add:               <:disabled:1087683956197031976>\n
-        AntiBan:                   <:disabled:1087683956197031976>
+        AntiRole Create/Delete:    ❌,\n
+        AntiChannel Create/Delete: ❌,\n
+        AntiWebhook Create/Delete: ❌\n
+        AntiKick:                  ❌\n
+        AntiBot Add:               ❌\n
+        AntiBan:                   ❌
         `
             )
             .setColor(client.color)
@@ -126,12 +131,13 @@ module.exports = {
       kicks: "AntiKick",
       bans: "AntiBan",
       antibot: "AntiBots Add",
+      guildUpdate: "AntiGuild Update"
     };
 
     interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setDescription(`${Anti[category]} <:disabled:1087683956197031976>`)
+          .setDescription(`${Anti[category]} ❌`)
           .setColor(client.color),
       ],
     });

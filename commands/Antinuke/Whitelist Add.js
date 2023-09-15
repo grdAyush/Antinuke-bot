@@ -42,6 +42,10 @@ module.exports = {
           name: "AntiBan",
           value: "bans",
         },
+        {
+          name: "AntiGuild Update",
+          value: "guildUpdate",
+        },
       ],
     },
   ],
@@ -68,7 +72,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setDescription(
-              "‼ This Command Is Only For Guild Owner And The Users That Have Access To ownerLevel"
+              " This Command Is Only For Guild Owner And The Users That Have Access To ownerLevel"
             )
             .setColor(client.color),
         ],
@@ -124,6 +128,7 @@ module.exports = {
       kicks: "AntiKick",
       bans: "AntiBan",
       antibot: "AntiBots Add",
+      guildUpdate: "AntiGuild Update",
     };
 
         logChannel.send({

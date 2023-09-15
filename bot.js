@@ -5,13 +5,7 @@ class MainClient extends Client {
         super({
             shards: "auto",
             allowedMentions: { parse: ["users", "roles"] },
-            intents: [
-                GatewayIntentBits.Guilds,
-                GatewayIntentBits.GuildMembers,
-                GatewayIntentBits.GuildMessages,
-                GatewayIntentBits.GuildVoiceStates,
-                GatewayIntentBits.MessageContent,
-            ]
+            intents: 32767,
         });
 
     this.config = require("./Settings/config.js");

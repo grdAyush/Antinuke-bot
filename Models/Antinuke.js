@@ -9,10 +9,11 @@ const guildSettingsSchema = new mongoose.Schema({
     kicks: [{ type: String }],
     bans: [{ type: String }],
     antibot: [{ type: String }],
+    guildUpdate: [{ type: String }]
   },
   actions: [{
     userId: { type: String, required: true },
-    category: { type: String, enum: ['roles', 'channels', 'webhooks', 'kicks', 'bans', 'antibot'], required: true },
+    category: { type: String, enum: ['roles', 'channels', 'webhooks', 'kicks', 'bans', 'antibot', 'guildUpdate'], required: true },
     timestamp: { type: Date, default: Date.now },
   }],
   logChannel: { type: String, default: null },
@@ -23,6 +24,7 @@ const guildSettingsSchema = new mongoose.Schema({
     kicks: { type: Boolean, default: false },
     bans: { type: Boolean, default: false },
     antibot: { type: Boolean, default: false },
+    guildUpdate: { type: Boolean, default: false }
   },
   ownerLevel: [{ type: String, default: null }],
 });

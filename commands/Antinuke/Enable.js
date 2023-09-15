@@ -40,6 +40,10 @@ module.exports = {
           name: "AntiBan",
           value: "bans",
         },
+        {
+          name: "AntiGuild Update",
+          value: "guildUpdate",
+        }
       ],
     },
   ],
@@ -55,7 +59,7 @@ module.exports = {
     inVoice: false,
     sameVoice: false,
   },
-  run: async (interaction, client, user, language) => {
+  run: async (interaction, client) => {
     await interaction.deferReply();
     if(!interaction.guild.members.me.permissions.has(PermissionFlagsBits.Administrator)) interaction .channel.send({
       content: "**Warning**: I Don't Have Administrator Permission, Please Gimme Perms Of Administrator"
@@ -81,21 +85,22 @@ module.exports = {
       settings.enabled.kicks = true;
       settings.enabled.bans = true;
       settings.enabled.antibot = true;
+      settings.enabled.guildUpdate = true;
 
       await settings.save();
 
       interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setTitle("<a:antinuke:1087674015352623194> Antinuke Settings")
+            .setTitle("🚩 Antinuke Settings")
             .setDescription(
               `
-        AntiRole Create/Delete:    <:enable:1087674705726668863>,\n
-        AntiChannel Create/Delete: <:enable:1087674705726668863>,\n
-        AntiWebhook Create/Delete: <:enable:1087674705726668863>\n
-        AntiKick:                  <:enable:1087674705726668863>\n
-        AntiBot Add:               <:enable:1087674705726668863>\n
-        AntiBan:                   <:enable:1087674705726668863>
+        AntiRole Create/Delete:    ✔️\n
+        AntiChannel Create/Delete: ✔️\n
+        AntiWebhook Create/Delete: ✔️\n
+        AntiKick:                  ✔️\n
+        AntiBot Add:               ✔️\n
+        AntiBan:                   ✔️
         `
             )
             .setColor(client.color)
@@ -126,12 +131,13 @@ module.exports = {
       kicks: "AntiKick",
       bans: "AntiBan",
       antibot: "AntiBots Add",
+      guildUpdate: "AntiGuild Update"
     };
 
         interaction.editReply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`${Anti[category]} <:enable:1087674705726668863>`)
+              .setDescription(`${Anti[category]} ✔️`)
               .setColor(client.color)
               .setTimestamp(),
           ],

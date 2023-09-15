@@ -42,6 +42,10 @@ module.exports = {
                 name: "AntiBan",
                 value: "bans",
               },
+              {
+                name: "AntiGuild Update",
+                value: "guildUpdate",
+              }
             ],
           },
     ],

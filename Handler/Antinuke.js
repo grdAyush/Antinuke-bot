@@ -882,4 +882,85 @@ module.exports = (client) => {
       }
     );
   });
+
+  //=================================== Anti Guild Update ===================================//
+  client.on('guildUpdate',  async (o, n) => {
+
+    const auditLog = await o.fetchAuditLogs({
+      limit: 1,
+      type: AuditLogEvent.GuildUpdate,
+    });
+           
+    const logs = auditLog.entries.first();
+          
+    if (!logs) return;
+    const { executor } = logs;
+      
+         await GuildSettings.findOne(
+      { guildId: n.id },
+      async (err, data) => {      
+        if (!data) return;
+        const antinuke = data.guildId;
+        const trusted = data.whitelist.guildUpdate.includes(executor.id);
+        const owner = data.ownerLevel.includes(executor.id);
+
+        if (antinuke === false) return;
+        if (trusted === true) return;
+        if (owner === true) return;
+        if (executor.id === client.user.id) return;
+                 
+          const oldIcon = o.iconURL();
+          
+          const oldName = o.name;
+          
+          const newIcon = n.iconURL();
+          const newName = n.name;
+          
+          if (oldName !== newName) {
+            await n.setName(oldName);
+          }
+          
+          if (oldIcon !== newIcon) {
+            await o.setIcon(oldIcon);
+          }
+          
+          const member = await n.guild.members.fetch(executor.id);
+          member.ban({ reason: "© Nityam Anti Guild Update" });
+          const logChannel = webhook.guild.channels.cache.get(data.logChannel);
+          if (logChannel) {
+            logChannel.send({
+              embeds: [
+                new EmbedBuilder()
+                  .setColor(client.color)
+                  .setAuthor({
+                    name: client.user.username,
+                    iconURL: client.user.displayAvatarURL(),
+                  })
+                  .addFields(
+                    {
+                      name: "Category",
+                      value: `> Anti Guild Update`,
+                    },
+                    {
+                      name: "Log Type",
+                      value: "> User Banned",
+                    },
+                    {
+                      name: "User",
+                      value: `> ${executor} ${executor.id}`,
+                    },
+                    {
+                      name: "Reason",
+                      value: "> © Nityam Anti Guild Update",
+                    }
+                  )
+                  .setFooter({ text: `© Nityam Antinuke Logs` })
+                  .setTimestamp(),
+              ],
+            });
+          }
+          
+        
+      })
+  });
 };

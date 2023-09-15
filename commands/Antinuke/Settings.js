@@ -23,7 +23,7 @@ module.exports = {
 
        const data = await GuildSettings.findOne({ guildId: interaction.guild.id });
        if(!data) { interaction.editReply({ content: `No Data Found`, ephemeral: true});} else {
-        const emoji = { true: "<:enable:1087674705726668863>", false: "<:disabled:1087683956197031976>"}
+        const emoji = { true: "✔️", false: "❌"}
 
 
         interaction.editReply({ embeds: [
@@ -34,7 +34,8 @@ module.exports = {
             Anti Webhook: ${emoji[data.enabled.webhooks]}\n
             Anti Ban : ${emoji[data.enabled.bans]}\n
             Anti Kick: ${emoji[data.enabled.kicks]}\n
-            Anti Bot Add: ${emoji[data.enabled.antibot]}
+            Anti Bot Add: ${emoji[data.enabled.antibot]}\n
+            Anti Guild Update: ${emoji[data.enabled.guildUpdate]}\n
             `)
             .setColor(client.color)
         ]})
