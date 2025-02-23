@@ -1,7 +1,7 @@
 require("dotenv").config();
 module.exports = {
     webhook: {
-        error: "" || process.env.error, //webhook link where error logs are sent
+        error: "" || process.env.error, //webh573643ook link where error logs are sent
         join: "" || process.env.join, //webhook link where join logs are sent
         leave: "" || process.env.leave, //webhook link where leave logs are sent
     },
