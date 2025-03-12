@@ -35,9 +35,9 @@
 
 ### Requirements
 
-- [x] Node.js v16+ [Download Node.js](https://nodejs.org/en/download/)
-- [x] Discord Bot Token [Bot Token Guide](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)
-- [x] MongoDB [Download MongoDB](https://www.mongodb.com/try/download/community) (Download & install = Finish!)
+- [x] Node.js v16+ [Download Node.js](https://nodejs.org/en/download/)  
+- [x] Discord Bot Token [Get Bot Token](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot)  
+- [x] MongoDB URI [Get MongoDB URI](https://www.mongodb.com/docs/manual/reference/connection-string/)  
 
 </details>
 
