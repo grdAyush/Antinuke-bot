@@ -110,6 +110,5 @@ npm run start or bun run start
 ## Credits
 
 Created By [Ayush](https://github.com/grdAyush)
-Contributer [Xretic ∞](https://github.com/Xretic69)
 
 
